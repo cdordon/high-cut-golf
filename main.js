@@ -1,0 +1,102 @@
+import Client from 'shopify-buy';
+
+const client = Client.buildClient({
+  domain: 'YOUR_STORE.myshopify.com', // Replace with your URL
+  storefrontAccessToken: 'YOUR_TOKEN' // Replace with your Token
+});
+
+let checkoutId = null;
+const grid = document.querySelector('#product-grid');
+const drawer = document.querySelector('#cart-drawer');
+const overlay = document.querySelector('#cart-overlay');
+
+// Initialize the Shop
+async function init() {
+  // 1. Create a fresh Shopify Checkout session
+  const checkout = await client.checkout.create();
+  checkoutId = checkout.id;
+
+  // 2. Load Products
+  const products = await client.product.fetchAll();
+  renderProducts(products);
+  
+  // 3. Setup UI Listeners
+  document.querySelector('#close-cart').onclick = toggleCart;
+  overlay.onclick = toggleCart;
+  document.querySelector('#cart-count').onclick = toggleCart;
+}
+
+function renderProducts(products) {
+  grid.innerHTML = '';
+  products.forEach(product => {
+    const card = document.createElement('div');
+    card.className = "group cursor-pointer";
+    const variantId = product.variants[0].id; // Get the specific ID for this size/color
+
+    card.innerHTML = `
+      <div class="aspect-[4/5] overflow-hidden bg-stone-100 mb-4 rounded-sm">
+        <img src="${product.images[0].src}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" />
+      </div>
+      <div class="flex justify-between items-start mb-4">
+        <h3 class="font-bold uppercase text-sm tracking-wide">${product.title}</h3>
+        <p class="font-medium">$${product.variants[0].price.amount}</p>
+      </div>
+    `;
+
+    // Add To Bag Button
+    const btn = document.createElement('button');
+    btn.className = "w-full border border-stone-900 py-3 uppercase text-xs font-bold tracking-widest hover:bg-stone-900 hover:text-white transition";
+    btn.innerText = "Add to Bag";
+    btn.onclick = () => addToCart(variantId);
+    
+    card.appendChild(btn);
+    grid.appendChild(card);
+  });
+}
+
+async function addToCart(variantId) {
+  const lineItemsToAdd = [{ variantId, quantity: 1 }];
+  
+  // Send data to Shopify
+  const checkout = await client.checkout.addLineItems(checkoutId, lineItemsToAdd);
+  
+  updateCartUI(checkout);
+  toggleCart(); // Open the drawer after adding
+}
+
+function updateCartUI(checkout) {
+  const cartContainer = document.querySelector('#cart-items');
+  const countDisplay = document.querySelector('#cart-count');
+  const subtotalDisplay = document.querySelector('#cart-subtotal');
+  
+  countDisplay.innerText = `Cart (${checkout.lineItems.length})`;
+  subtotalDisplay.innerText = `$${checkout.paymentDue.amount}`;
+
+  if (checkout.lineItems.length === 0) {
+    cartContainer.innerHTML = `<p class="text-stone-400 italic">Your bag is empty.</p>`;
+    return;
+  }
+
+  cartContainer.innerHTML = checkout.lineItems.map(item => `
+    <div class="flex gap-4">
+      <img src="${item.variant.image.src}" class="w-20 h-24 object-cover bg-stone-100">
+      <div class="flex-1">
+        <h4 class="font-bold text-sm uppercase">${item.title}</h4>
+        <p class="text-xs text-stone-500 italic">${item.variant.title}</p>
+        <p class="mt-2 text-sm font-medium">$${item.variant.price.amount}</p>
+      </div>
+    </div>
+  `).join('');
+
+  // Set the Checkout Button Link
+  document.querySelector('#checkout-btn').onclick = () => {
+    window.location.href = checkout.webUrl;
+  };
+}
+
+function toggleCart() {
+  drawer.classList.toggle('translate-x-full');
+  overlay.classList.toggle('hidden');
+}
+
+init();
