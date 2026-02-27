@@ -8,13 +8,23 @@
   </head>
   <body class="bg-[#fdfcfb] text-stone-900 font-sans">
     
-    <nav class="flex justify-between items-center p-8 border-b border-stone-200 bg-white sticky top-0 z-50">
+    <nav class="flex justify-between items-center p-6 border-b border-stone-200 bg-white sticky top-0 z-50">
   
   <a href="/" class="block">
-   <img src="/High Cut Golf Logo.svg" alt="High Cut Golf Logo" class="h-12 w-auto object-contain" />
+    <img src="/High Cut Golf Logo.svg" alt="High Cut Golf Logo" class="h-10 w-auto object-contain" />
   </a>
 
-  <div id="cart-count">...</div>
+  <div class="flex items-center space-x-6">
+    <a href="#product-grid" class="flex items-center space-x-2 group">
+      <img src="/High Cut Golf Logo.svg" alt="Mini Logo" class="h-6 w-auto opacity-60 group-hover:opacity-100 transition" />
+      <span class="font-bold uppercase text-xs tracking-widest hover:text-green-800 transition"></span>
+    </a>
+
+    <div id="cart-count" class="font-medium uppercase text-[10px] tracking-widest border border-stone-900 px-3 py-1 rounded-full cursor-pointer hover:bg-stone-900 hover:text-white transition">
+      Cart (0)
+    </div>
+  </div>
+
 </nav>
 
     <header class="py-20 px-8 text-center max-w-4xl mx-auto">
