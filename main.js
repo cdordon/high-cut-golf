@@ -1,3 +1,4 @@
+import { inject } from '@vercel/analytics';
 import Client from 'shopify-buy';
 
 const client = Client.buildClient({
@@ -100,3 +101,4 @@ function toggleCart() {
 }
 
 init();
+inject();
