@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "devDependencies": {
+    "glob": "^10.3.10",
     "vite": "^7.3.1"
   },
   "dependencies": {
