@@ -9,6 +9,8 @@ export default defineConfig({
         hats: resolve(__dirname, 'hats.html'),
         shirts: resolve(__dirname, 'shirts.html'),
         accessories: resolve(__dirname, 'accessories.html'),
+        // ADD THIS LINE BELOW
+        404: resolve(__dirname, '404.html'),
       },
     },
   },

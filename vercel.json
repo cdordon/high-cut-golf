@@ -1,1 +1,6 @@
-If you can't find the page, send them to my 404.html instead of showing that white box error.
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/404.html", "condition": "not_found" }
+  ]
+}
