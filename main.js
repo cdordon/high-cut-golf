@@ -2,8 +2,8 @@ import { inject } from '@vercel/analytics';
 import Client from 'shopify-buy';
 
 const client = Client.buildClient({
-  domain: 'YOUR_STORE.myshopify.com', // Replace with your URL
-  storefrontAccessToken: 'YOUR_TOKEN' // Replace with your Token
+  domain: 'YOUR_STORE.myshopify.com', 
+  storefrontAccessToken: 'YOUR_TOKEN' 
 });
 
 let checkoutId = null;
@@ -11,28 +11,47 @@ const grid = document.querySelector('#product-grid');
 const drawer = document.querySelector('#cart-drawer');
 const overlay = document.querySelector('#cart-overlay');
 
+// --- NEW ANIMATION SETUP ---
+const observerOptions = {
+    threshold: 0.2 
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.remove('opacity-0', '-translate-x-12', 'translate-x-12');
+            entry.target.classList.add('opacity-100', 'translate-x-0');
+        }
+    });
+}, observerOptions);
+// ---------------------------
+
 // Initialize the Shop
 async function init() {
-  // 1. Create a fresh Shopify Checkout session
   const checkout = await client.checkout.create();
   checkoutId = checkout.id;
 
-  // 2. Load Products
   const products = await client.product.fetchAll();
   renderProducts(products);
   
-  // 3. Setup UI Listeners
   document.querySelector('#close-cart').onclick = toggleCart;
   overlay.onclick = toggleCart;
   document.querySelector('#cart-count').onclick = toggleCart;
+
+  // --- NEW ANIMATION EXECUTION ---
+  // We put this here so it catches products AFTER they are rendered
+  document.querySelectorAll('.reveal-left, .reveal-right').forEach(el => {
+    observer.observe(el);
+  });
 }
 
 function renderProducts(products) {
   grid.innerHTML = '';
   products.forEach(product => {
     const card = document.createElement('div');
-    card.className = "group cursor-pointer";
-    const variantId = product.variants[0].id; // Get the specific ID for this size/color
+    // NOTE: If you want the products to swipe, add 'reveal-left' to the className below:
+    card.className = "group cursor-pointer reveal-left opacity-0 -translate-x-12 transition duration-1000";
+    const variantId = product.variants[0].id;
 
     card.innerHTML = `
       <div class="aspect-[4/5] overflow-hidden bg-stone-100 mb-4 rounded-sm">
@@ -44,7 +63,6 @@ function renderProducts(products) {
       </div>
     `;
 
-    // Add To Bag Button
     const btn = document.createElement('button');
     btn.className = "w-full border border-stone-900 py-3 uppercase text-xs font-bold tracking-widest hover:bg-stone-900 hover:text-white transition";
     btn.innerText = "Add to Bag";
@@ -57,12 +75,9 @@ function renderProducts(products) {
 
 async function addToCart(variantId) {
   const lineItemsToAdd = [{ variantId, quantity: 1 }];
-  
-  // Send data to Shopify
   const checkout = await client.checkout.addLineItems(checkoutId, lineItemsToAdd);
-  
   updateCartUI(checkout);
-  toggleCart(); // Open the drawer after adding
+  toggleCart(); 
 }
 
 function updateCartUI(checkout) {
@@ -89,7 +104,6 @@ function updateCartUI(checkout) {
     </div>
   `).join('');
 
-  // Set the Checkout Button Link
   document.querySelector('#checkout-btn').onclick = () => {
     window.location.href = checkout.webUrl;
   };
