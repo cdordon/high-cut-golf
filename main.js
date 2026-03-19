@@ -2,8 +2,8 @@ import { inject } from '@vercel/analytics';
 import Client from 'shopify-buy';
 
 const client = Client.buildClient({
-  domain: 'YOUR_STORE.myshopify.com', 
-  storefrontAccessToken: 'YOUR_TOKEN' 
+  domain: 'YOUR_STORE.myshopify.com', // Replace with your URL
+  storefrontAccessToken: 'YOUR_TOKEN' // Replace with your Token
 });
 
 let checkoutId = null;
@@ -11,9 +11,9 @@ const grid = document.querySelector('#product-grid');
 const drawer = document.querySelector('#cart-drawer');
 const overlay = document.querySelector('#cart-overlay');
 
-// --- NEW ANIMATION SETUP ---
+// --- 1. ANIMATION SETUP (Global) ---
 const observerOptions = {
-    threshold: 0.2 
+    threshold: 0.1 
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -24,32 +24,39 @@ const observer = new IntersectionObserver((entries) => {
         }
     });
 }, observerOptions);
-// ---------------------------
 
-// Initialize the Shop
-async function init() {
+// This function runs for BOTH static HTML and dynamic products
+function startAnimations() {
+  document.querySelectorAll('.reveal-left, .reveal-right').forEach(el => {
+    observer.observe(el);
+  });
+}
+
+// --- 2. SHOPIFY LOGIC ---
+async function initShopify() {
+  // Only run if the elements exist (prevents crashing on About page)
+  if (!grid) return; 
+
   const checkout = await client.checkout.create();
   checkoutId = checkout.id;
 
   const products = await client.product.fetchAll();
   renderProducts(products);
   
-  document.querySelector('#close-cart').onclick = toggleCart;
-  overlay.onclick = toggleCart;
-  document.querySelector('#cart-count').onclick = toggleCart;
+  // Setup Shop Listeners
+  if(document.querySelector('#close-cart')) document.querySelector('#close-cart').onclick = toggleCart;
+  if(overlay) overlay.onclick = toggleCart;
+  if(document.querySelector('#cart-count')) document.querySelector('#cart-count').onclick = toggleCart;
 
-  // --- NEW ANIMATION EXECUTION ---
-  // We put this here so it catches products AFTER they are rendered
-  document.querySelectorAll('.reveal-left, .reveal-right').forEach(el => {
-    observer.observe(el);
-  });
+  // Re-run animations to catch the newly rendered product cards
+  startAnimations();
 }
 
 function renderProducts(products) {
+  if (!grid) return;
   grid.innerHTML = '';
   products.forEach(product => {
     const card = document.createElement('div');
-    // NOTE: If you want the products to swipe, add 'reveal-left' to the className below:
     card.className = "group cursor-pointer reveal-left opacity-0 -translate-x-12 transition duration-1000";
     const variantId = product.variants[0].id;
 
@@ -82,11 +89,13 @@ async function addToCart(variantId) {
 
 function updateCartUI(checkout) {
   const cartContainer = document.querySelector('#cart-items');
+  if (!cartContainer) return;
+
   const countDisplay = document.querySelector('#cart-count');
   const subtotalDisplay = document.querySelector('#cart-subtotal');
   
-  countDisplay.innerText = `Cart (${checkout.lineItems.length})`;
-  subtotalDisplay.innerText = `$${checkout.paymentDue.amount}`;
+  if(countDisplay) countDisplay.innerText = `Cart (${checkout.lineItems.length})`;
+  if(subtotalDisplay) subtotalDisplay.innerText = `$${checkout.paymentDue.amount}`;
 
   if (checkout.lineItems.length === 0) {
     cartContainer.innerHTML = `<p class="text-stone-400 italic">Your bag is empty.</p>`;
@@ -104,15 +113,22 @@ function updateCartUI(checkout) {
     </div>
   `).join('');
 
-  document.querySelector('#checkout-btn').onclick = () => {
-    window.location.href = checkout.webUrl;
-  };
+  const checkoutBtn = document.querySelector('#checkout-btn');
+  if(checkoutBtn) {
+    checkoutBtn.onclick = () => { window.location.href = checkout.webUrl; };
+  }
 }
 
 function toggleCart() {
-  drawer.classList.toggle('translate-x-full');
-  overlay.classList.toggle('hidden');
+  if(drawer) drawer.classList.toggle('translate-x-full');
+  if(overlay) overlay.classList.toggle('hidden');
 }
 
-init();
+// --- 3. EXECUTION ---
+// First, start animations for static text (About page)
+startAnimations();
+
+// Then, try to load Shopify data (Shop page)
+initShopify();
+
 inject();
