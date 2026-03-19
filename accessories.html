@@ -21,14 +21,15 @@
     <main class="flex flex-col items-center justify-center min-h-[70vh] px-8 relative z-10">
     
     <style>
-        /* Matches Tailwind's 'animate-pulse' timing exactly */
-        @keyframes high-cut-color-pulse {
-            0%, 100% { color: #000; }        /* Black when logo is boldest */
-            50% { color: #4D8440; }         /* Green when logo is most transparent */
+        /* 1. We name the animation and define the color "swing" */
+        @keyframes sync-high-cut {
+            0%, 100% { color: #4D8440; }    /* Green: When logo is at 100% opacity (Darkest) */
+            50% { color: #000000; }         /* Black: When logo is at 50% opacity (Lightest) */
         }
 
-        .animate-text-pulse {
-            animation: high-cut-color-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        /* 2. We match Tailwind's internal pulse timing exactly (2s, cubic-bezier) */
+        .animate-sync-text {
+            animation: sync-high-cut 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
     </style>
 
@@ -37,7 +38,7 @@
          class="h-48 md:h-64 w-auto animate-pulse opacity-[0.135] select-none mb-8" />
     
     <p class="uppercase text-sm tracking-[0.2em] font-bold text-center text-stone-500">
-        Our <span id="page-category" class="animate-text-pulse">Accessories</span> Are Coming Soon
+        Our <span id="page-category" class="animate-sync-text">accessories</span> Are Coming Soon
     </p>
 </main>
 
