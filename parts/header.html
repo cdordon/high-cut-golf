@@ -5,11 +5,11 @@
             <img src="/High Cut Golf Logo.svg" alt="High Cut Golf Logo" class="h-12 w-auto transition-opacity group-hover:opacity-80" />
         </a>
 
-        <div class="hidden md:flex items-center space-x-8 text-[14px] font-bold uppercase tracking-[0.2em] text-stone-400">
-            <a href="/about" class="hover:text-[#4D8440] transition-colors duration-300">About</a>
-            <a href="/hats" class="hover:text-[#4D8440] transition-colors duration-300">Hats</a>
-            <a href="/shirts" class="hover:text-[#4D8440] transition-colors duration-300">Shirts</a>
-            <a href="/accessories" class="hover:text-[#4D8440] transition-colors duration-300">Accessories</a>
+        <div id="desktop-menu" class="hidden md:flex items-center space-x-8 text-[14px] font-bold uppercase tracking-[0.2em] text-stone-400">
+            <a href="/about" class="nav-link hover:text-[#4D8440] transition-colors duration-300 pb-1 border-b-2 border-transparent">About</a>
+            <a href="/hats" class="nav-link hover:text-[#4D8440] transition-colors duration-300 pb-1 border-b-2 border-transparent">Hats</a>
+            <a href="/shirts" class="nav-link hover:text-[#4D8440] transition-colors duration-300 pb-1 border-b-2 border-transparent">Shirts</a>
+            <a href="/accessories" class="nav-link hover:text-[#4D8440] transition-colors duration-300 pb-1 border-b-2 border-transparent">Accessories</a>
         </div>
 
         <button id="mobile-menu-button" class="md:hidden text-stone-400 hover:text-[#4D8440] focus:outline-none transition-colors">
@@ -19,14 +19,13 @@
         </button>
     </div>
 
-    <div id="mobile-menu" 
-         class="grid grid-rows-[0fr] opacity-0 transition-all duration-[750ms] ease-in-out md:hidden bg-black border-stone-900 shadow-2xl">
+    <div id="mobile-menu" class="grid grid-rows-[0fr] opacity-0 transition-all duration-[750ms] ease-in-out md:hidden bg-black border-stone-900 shadow-2xl">
         <div class="overflow-hidden">
-            <div class="flex flex-col space-y-4 p-8 text-[11px] font-bold uppercase tracking-[0.3em] text-stone-400 border-t border-stone-900">
-                <a href="/about" class="hover:text-[#4D8440] transition-colors">About</a>
-                <a href="/hats" class="hover:text-[#4D8440] transition-colors">Hats</a>
-                <a href="/shirts" class="hover:text-[#4D8440] transition-colors">Shirts</a>
-                <a href="/accessories" class="hover:text-[#4D8440] transition-colors">Accessories</a>
+            <div id="mobile-links" class="flex flex-col space-y-4 p-8 text-[11px] font-bold uppercase tracking-[0.3em] text-stone-400 border-t border-stone-900">
+                <a href="/about" class="nav-link hover:text-[#4D8440] transition-colors">About</a>
+                <a href="/hats" class="nav-link hover:text-[#4D8440] transition-colors">Hats</a>
+                <a href="/shirts" class="nav-link hover:text-[#4D8440] transition-colors">Shirts</a>
+                <a href="/accessories" class="nav-link hover:text-[#4D8440] transition-colors">Accessories</a>
             </div>
         </div>
     </div>
@@ -34,24 +33,19 @@
 
 <script>
     (function() {
+        // 1. Handle Mobile Menu Toggle
         const btn = document.getElementById('mobile-menu-button');
         const menu = document.getElementById('mobile-menu');
         const icon = document.getElementById('menu-icon');
 
         if (btn && menu) {
             btn.addEventListener('click', () => {
-                // Check current state
                 const isOpen = menu.classList.contains('grid-rows-[1fr]');
-                
-                // Toggle Height (Grid Row)
                 menu.classList.toggle('grid-rows-[0fr]', isOpen);
                 menu.classList.toggle('grid-rows-[1fr]', !isOpen);
-                
-                // Toggle Fade (Opacity)
                 menu.classList.toggle('opacity-0', isOpen);
                 menu.classList.toggle('opacity-100', !isOpen);
                 
-                // Toggle Icon (Hamburger to X)
                 if (!isOpen) {
                     icon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
                 } else {
@@ -59,5 +53,24 @@
                 }
             });
         }
+
+        // 2. Handle Active Page Highlighting
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        navLinks.forEach(link => {
+            // Check if the link's href matches the current URL path
+            if (link.getAttribute('href') === currentPath) {
+                // Apply Active Styles
+                link.classList.remove('text-stone-400');
+                link.classList.add('text-[#4D8440]');
+                
+                // Specifically for desktop: show the green bottom border
+                if (link.classList.contains('border-transparent')) {
+                    link.classList.remove('border-transparent');
+                    link.classList.add('border-[#4D8440]');
+                }
+            }
+        });
     })();
 </script>
