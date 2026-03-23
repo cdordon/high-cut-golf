@@ -145,41 +145,62 @@
 
 </div>
 
-<section id="instagram-feed" class="bg-black py-20 border-t border-stone-900">
+<section id="instagram-feed" 
+         class="reveal-up opacity-0 translate-y-12 transition-all duration-1000 ease-out bg-black py-20 border-t border-stone-900">
     <div class="max-w-7xl mx-auto px-6">
         
         <div class="flex justify-between items-end mb-10">
             <div>
                 <span class="text-[#4D8440] font-bold uppercase tracking-[0.2em] text-xs">Instagram</span>
-                <h2 class="text-stone-200 text-3xl font-bold uppercase tracking-tighter mt-2">Latest from HCG</h2>
+                <h2 class="text-stone-200 text-3xl font-bold uppercase tracking-tighter mt-2">Latest from the Green</h2>
             </div>
             <a href="https://instagram.com/highcutgolfus" target="_blank" class="text-stone-400 hover:text-[#4D8440] transition-colors uppercase text-[10px] font-bold tracking-widest pb-1 border-b border-stone-800">
-                Follow @HighCutGolfUS
+                Follow @highcutgolfus
             </a>
         </div>
 
-        <div class="flex flex-wrap justify-center gap-4">
-    
-    <a href="https://www.instagram.com/highcutgolfus/p/DWKfCsWiWr-/" target="_blank" class="group relative w-full md:w-[calc(25%-1rem)] aspect-square overflow-hidden bg-stone-900/40 border border-white/10 transition-colors hover:border-white/30">
-        <img src="/hcgembroidery.jpg" alt="High Cut Golf Embroidery" class="object-cover w-full h-full opacity-80 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
-        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <span class="text-white text-xs font-bold tracking-widest uppercase">View Post</span>
-        </div>
-    </a>
+        <div class="flex flex-wrap justify-center gap-6">
+            
+            <a href="https://www.instagram.com/highcutgolfus/p/DWKfCsWiWr-/" target="_blank" class="group relative w-full md:w-[calc(33%-1rem)] aspect-square overflow-hidden bg-stone-900/40 border border-white/10 transition-colors hover:border-white/30">
+                <img src="/hcgembroidery.jpg" alt="High Cut Golf Embroidery Detail" class="object-cover w-full h-full opacity-80 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span class="text-white text-xs font-bold tracking-widest uppercase">View Post</span>
+                </div>
+            </a>
 
-    <a href="https://instagram.com/highcutgolfus" class="group relative w-full md:w-[calc(25%-1rem)] aspect-square overflow-hidden bg-stone-900/40 border border-white/10 transition-colors hover:border-white/30">
-        <img src="/hcgball.svg" alt="Instagram Post" class="object-cover w-full h-full opacity-80 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
-        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-            <span class="text-white text-xs font-bold tracking-widest uppercase">View Post</span>
+            <a href="https://www.instagram.com/highcutgolfus" target="_blank" class="group relative w-full md:w-[calc(33%-1rem)] aspect-square overflow-hidden bg-stone-900/40 border border-white/10 transition-colors hover:border-white/30">
+                <img src="/hcgball.svg" alt="High Cut Golf Ball Design" class="object-cover w-full h-full opacity-80 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
+                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span class="text-white text-xs font-bold tracking-widest uppercase">View Post</span>
+                </div>
+            </a>
+            
         </div>
-    </a>
-
-</div>
     </div>
 </section>
 
 <load src="/parts/footer.html" />
 
+<script>
+    (function() {
+        const observerOptions = { threshold: 0.15 };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Remove the 'hidden' states and trigger the animation
+                    entry.target.classList.remove('opacity-0', 'translate-y-12');
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Targets the Instagram feed and any other reveal elements
+        const target = document.getElementById('instagram-feed');
+        if (target) observer.observe(target);
+    })();
+</script>
 
   </body>
 </html>
