@@ -1,4 +1,4 @@
-import { inject } from '@vercel analytics';
+import { inject } from '@vercel/analytics';
 import Client from 'shopify-buy';
 
 // --- 1. SHOPIFY CONFIG ---
