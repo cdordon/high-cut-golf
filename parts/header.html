@@ -1,33 +1,47 @@
-<nav class="bg-black border-b border-stone-800 relative z-50">
+<nav class="bg-black border-b border-stone-800 relative z-[100] w-full">
     <div class="flex items-center justify-between p-6 max-w-7xl mx-auto w-full">
 
-        <a href="/" class="flex items-center group">
-            <img src="/High Cut Golf Logo.svg" alt="High Cut Golf Logo" class="h-12 w-auto transition-opacity group-hover:opacity-80" />
+        <a href="/" class="flex items-center group relative z-[110]">
+            <img src="/High Cut Golf Logo.svg" 
+                 alt="High Cut Golf Logo" 
+                 class="h-10 md:h-12 w-auto transition-all duration-300 group-hover:opacity-80 group-hover:scale-105" />
         </a>
 
-        <div id="desktop-menu" class="hidden md:flex items-center space-x-8 text-[14px] font-bold uppercase tracking-[0.2em] text-stone-400">
+        <div id="desktop-menu" class="hidden md:flex items-center space-x-8 text-[13px] font-bold uppercase tracking-[0.2em] text-stone-400">
             <a href="/" class="nav-link hover:text-[#4D8440] transition-colors duration-300 pb-1 border-b-2 border-transparent">Home</a>
             <a href="/hats" class="nav-link hover:text-[#4D8440] transition-colors duration-300 pb-1 border-b-2 border-transparent">Hats</a>
             <a href="/shirts" class="nav-link hover:text-[#4D8440] transition-colors duration-300 pb-1 border-b-2 border-transparent">Shirts</a>
             <a href="/accessories" class="nav-link hover:text-[#4D8440] transition-colors duration-300 pb-1 border-b-2 border-transparent">Accessories</a>
             <a href="/about" class="nav-link hover:text-[#4D8440] transition-colors duration-300 pb-1 border-b-2 border-transparent">About</a>
+            
+            <button id="cart-count" class="flex items-center space-x-2 bg-stone-900/50 px-4 py-2 rounded-full border border-stone-800 hover:border-[#4D8440] hover:text-white transition-all ml-4">
+                <span class="text-[10px] tracking-[0.3em]">Bag (0)</span>
+            </button>
         </div>
 
-        <button id="mobile-menu-button" class="md:hidden text-stone-400 hover:text-[#4D8440] focus:outline-none transition-colors">
-            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-        </button>
+        <div class="flex items-center space-x-6 md:hidden relative z-[110]">
+            <button id="cart-count-mobile" class="text-stone-400 hover:text-[#4D8440] transition-colors flex items-center">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+            </button>
+
+            <button id="mobile-menu-button" aria-label="Toggle Menu" class="text-stone-400 hover:text-[#4D8440] focus:outline-none transition-colors">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
     </div>
 
-    <div id="mobile-menu" class="grid grid-rows-[0fr] opacity-0 transition-all duration-[750ms] ease-in-out md:hidden bg-black border-stone-900 shadow-2xl">
-        <div class="overflow-hidden">
-            <div id="mobile-links" class="flex flex-col space-y-4 p-8 text-[11px] font-bold uppercase tracking-[0.3em] text-stone-400 border-t border-stone-900">
-                <a href="/" class="nav-link hover:text-[#4D8440] transition-colors">Home</a>
-                <a href="/hats" class="nav-link hover:text-[#4D8440] transition-colors">Hats</a>
-                <a href="/shirts" class="nav-link hover:text-[#4D8440] transition-colors">Shirts</a>
-                <a href="/accessories" class="nav-link hover:text-[#4D8440] transition-colors">Accessories</a>
-                <a href="/about" class="nav-link hover:text-[#4D8440] transition-colors">About</a>
+    <div id="mobile-menu" class="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-in-out md:hidden bg-black shadow-2xl overflow-hidden">
+        <div class="min-h-0">
+            <div id="mobile-links" class="flex flex-col space-y-6 p-10 text-[10px] font-black uppercase tracking-[0.4em] text-stone-400 border-t border-stone-900 bg-black">
+                <a href="/" class="nav-link hover:text-[#4D8440]">Home</a>
+                <a href="/hats" class="nav-link hover:text-[#4D8440]">Hats</a>
+                <a href="/shirts" class="nav-link hover:text-[#4D8440]">Shirts</a>
+                <a href="/accessories" class="nav-link hover:text-[#4D8440]">Accessories</a>
+                <a href="/about" class="nav-link hover:text-[#4D8440]">About</a>
             </div>
         </div>
     </div>
@@ -35,41 +49,43 @@
 
 <script>
     (function() {
-        // Mobile Toggle Logic
         const btn = document.getElementById('mobile-menu-button');
         const menu = document.getElementById('mobile-menu');
         const icon = document.getElementById('menu-icon');
+        const mobileCartBtn = document.getElementById('cart-count-mobile');
 
+        // Mobile Menu Toggle
         if (btn && menu) {
-            btn.addEventListener('click', () => {
+            btn.onclick = () => {
                 const isOpen = menu.classList.contains('grid-rows-[1fr]');
                 menu.classList.toggle('grid-rows-[0fr]', isOpen);
                 menu.classList.toggle('grid-rows-[1fr]', !isOpen);
                 menu.classList.toggle('opacity-0', isOpen);
                 menu.classList.toggle('opacity-100', !isOpen);
-                
-                if (!isOpen) {
-                    icon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
-                } else {
-                    icon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-                }
-            });
+                icon.setAttribute('d', isOpen ? 'M4 6h16M4 12h16M4 18h16' : 'M6 18L18 6M6 6l12 12');
+            };
+        }
+
+        // Connect Mobile Bag Icon to Cart Drawer
+        if (mobileCartBtn) {
+            mobileCartBtn.onclick = () => {
+                // We dispatch a custom event or check for global toggleCart
+                // Since main.js handles #cart-count, we can trigger a click on that
+                document.getElementById('cart-count')?.click();
+            };
         }
 
         // Active State Detection
         const currentPath = window.location.pathname;
         const navLinks = document.querySelectorAll('.nav-link');
-
         navLinks.forEach(link => {
-            // Check for exact match
-            if (link.getAttribute('href') === currentPath) {
-                link.classList.remove('text-stone-400');
-                link.classList.add('text-[#4D8440]');
-                
-                if (link.classList.contains('border-transparent')) {
-                    link.classList.remove('border-transparent');
-                    link.classList.add('border-[#4D8440]');
-                }
+            const linkHref = link.getAttribute('href');
+            const isHome = currentPath === '/' || currentPath === '/index.html';
+            const isActive = (linkHref === '/' && isHome) || (linkHref !== '/' && currentPath.includes(linkHref));
+
+            if (isActive) {
+                link.classList.replace('text-stone-400', 'text-[#4D8440]');
+                link.classList.replace('border-transparent', 'border-[#4D8440]');
             }
         });
     })();

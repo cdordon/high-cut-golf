@@ -1,0 +1,24 @@
+<div id="cart-overlay" class="fixed inset-0 bg-black/40 z-[60] hidden backdrop-blur-sm transition-opacity duration-300"></div>
+
+<div id="cart-drawer" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white z-[150] shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col">
+    
+    <div class="p-6 border-b border-stone-200 flex justify-between items-center bg-[#fdfcfb]">
+        <h2 class="text-xl font-bold uppercase tracking-widest text-green-900">Your Bag</h2>
+        <button id="close-cart" class="text-stone-400 hover:text-black uppercase text-[10px] font-black tracking-tighter transition-colors">Close</button>
+    </div>
+    
+    <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-6">
+        <p class="text-stone-400 italic text-sm">Your bag is as empty as a bunker...</p>
+    </div>
+
+    <div class="p-8 border-t border-stone-100 bg-[#fdfcfb]">
+        <div class="flex justify-between font-bold mb-6">
+            <span class="uppercase text-[10px] tracking-widest text-stone-500">Subtotal</span>
+            <span id="cart-subtotal" class="text-lg">$0.00</span>
+        </div>
+        <button id="checkout-btn" class="w-full bg-stone-900 text-white py-5 uppercase font-black text-[11px] tracking-[0.3em] hover:bg-[#4D8440] transition-all duration-300 shadow-lg">
+            Secure Checkout
+        </button>
+        <p class="text-[9px] text-center text-stone-400 uppercase tracking-widest mt-4 italic">Shipping & taxes calculated at checkout</p>
+    </div>
+</div>
