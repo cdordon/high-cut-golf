@@ -1,71 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>High Cut Golf | Premium Apparel</title>
+    <title>Shirts | High Cut Golf</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-K1QHEZG3JG"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-K1QHEZG3JG');
-</script>
-  </head>
-  <body class="bg-[#fdfcfb] text-stone-900 font-sans">
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-K1QHEZG3JG');
+    </script>
+</head>
+<body class="bg-[#fdfcfb] text-stone-900 font-sans overflow-x-hidden">
     
     <load src="parts/header.html" />
 
-    <main class="flex flex-col items-center justify-center min-h-[70vh] px-8 relative z-10">
-    
-    <style>
-        /* 1. We name the animation and define the color "swing" */
-        @keyframes sync-high-cut {
-            0%, 100% { color: #000000; }    /* Green: When logo is at 100% opacity (Darkest) */
-            50% { color: #4D8440; }         /* Black: When logo is at 50% opacity (Lightest) */
-        }
+    <load src="parts/background.html" />
 
-        /* 2. We match Tailwind's internal pulse timing exactly (2s, cubic-bezier) */
-        .animate-sync-text {
-            animation: sync-high-cut 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-    </style>
+    <main class="flex flex-col items-center justify-center min-h-[75vh] px-8 relative z-10">
+        
+        <style>
+            @keyframes sync-high-cut {
+                0%, 100% { color: #000000; }    
+                50% { color: #4D8440; }         
+            }
+            .animate-sync-text {
+                animation: sync-high-cut 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            }
+        </style>
 
-    <img src="/High Cut Golf Logo.svg" 
-         alt="High Cut Golf Logo" 
-         class="h-48 md:h-64 w-auto animate-pulse opacity-[0.135] select-none mb-8" />
-    
-    <p class="uppercase text-xl tracking-[0.2em] font-bold text-center text-stone-500">
-        Our <span id="page-category" class="animate-sync-text">shirts</span> Are Coming Soon
-    </p>
-</main>
+        <div class="reveal-up opacity-0 translate-y-12 scale-90 transition-all duration-1000 ease-out text-center">
+            <p class="uppercase text-xl md:text-2xl tracking-[0.2em] font-bold text-stone-500">
+                Our <span id="page-category" class="animate-sync-text">Shirts</span> Are Coming Soon
+            </p>
+           
+        </div>
+    </main>
+
+    <div id="cart-overlay" class="fixed inset-0 bg-black/40 z-[60] hidden backdrop-blur-sm"></div>
+    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white z-[70] shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+      <div class="p-6 border-b border-stone-200 flex justify-between items-center">
+        <h2 class="text-xl font-bold uppercase tracking-widest text-green-900">Your Bag</h2>
+        <button id="close-cart" class="text-stone-400 hover:text-black uppercase text-xs font-bold tracking-tighter">Close</button>
+      </div>
+      <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-6">
+        <p class="text-stone-400 italic text-sm">Your bag is as empty as a bunker...</p>
+      </div>
+      <div class="p-6 border-t border-stone-200">
+        <div class="flex justify-between font-bold mb-4">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">$0.00</span>
+        </div>
+        <button id="checkout-btn" class="w-full bg-stone-900 text-white py-4 uppercase font-bold tracking-widest hover:bg-green-800 transition">
+          Secure Checkout
+        </button>
+      </div>
+    </div>
+
+    <load src="/parts/footer.html" />
 
     <script type="module" src="/main.js"></script>
-    <div id="cart-overlay" class="fixed inset-0 bg-black/40 z-[60] hidden backdrop-blur-sm"></div>
-
-<div id="cart-drawer" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white z-[70] shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
-  <div class="p-6 border-b border-stone-200 flex justify-between items-center">
-    <h2 class="text-xl font-bold uppercase tracking-widest text-green-900">Your Bag</h2>
-    <button id="close-cart" class="text-stone-400 hover:text-black uppercase text-xs font-bold tracking-tighter">Close</button>
-  </div>
-  
-  <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-6">
-    <p class="text-stone-400 italic">Your bag is as empty as a bunker...</p>
-  </div>
-
-  <div class="p-6 border-t border-stone-200">
-    <div class="flex justify-between font-bold mb-4">
-      <span>Subtotal</span>
-      <span id="cart-subtotal">$0.00</span>
-    </div>
-    <button id="checkout-btn" class="w-full bg-stone-900 text-white py-4 uppercase font-bold tracking-widest hover:bg-green-800 transition">
-      Secure Checkout
-    </button>
-  </div>
-</div><load src="/parts/footer.html" />
-
-
-  </body>
+</body>
 </html>
