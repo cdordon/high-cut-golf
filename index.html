@@ -24,7 +24,9 @@
       gtag('config', 'G-K1QHEZG3JG');
     </script>
 </head>
-<body class="bg-[#fdfcfb] text-stone-900 font-sans overflow-x-hidden w-full position-relative">
+<body class="bg-[#fdfcfb] text-stone-900 font-sans overflow-x-hidden">
+
+    <load src="parts/background.html" />
 
     <load src="parts/header.html" />
 
@@ -73,21 +75,6 @@
     </section>
 
     <load src="parts/cart.html" />
-        <div class="p-6 border-b border-stone-200 flex justify-between items-center">
-            <h2 class="text-xl font-bold uppercase tracking-widest text-green-900">Your Bag</h2>
-            <button id="close-cart" class="text-stone-400 hover:text-black uppercase text-xs font-bold tracking-tighter">Close</button>
-        </div>
-        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-6">
-            <p class="text-stone-400 italic">Your bag is as empty as a bunker...</p>
-        </div>
-        <div class="p-6 border-t border-stone-200">
-            <div class="flex justify-between font-bold mb-4">
-                <span>Subtotal</span>
-                <span id="cart-subtotal">$0.00</span>
-            </div>
-            <button id="checkout-btn" class="w-full bg-stone-900 text-white py-4 uppercase font-bold tracking-widest hover:bg-green-800 transition">Secure Checkout</button>
-        </div>
-    </div>
 
     <div id="cookie-banner" class="fixed bottom-4 left-4 right-4 md:left-auto md:right-8 md:w-80 bg-stone-900/95 backdrop-blur-md border border-stone-800 p-4 z-[100] shadow-2xl flex flex-col gap-3">
         <p class="text-[9px] uppercase tracking-widest text-stone-400 leading-relaxed">We use cookies to improve your experience. By staying, you're cool with it.</p>
@@ -121,7 +108,7 @@
         </div>
     </div>
 
-    <load src="/parts/footer.html" />
+    <load src="parts/footer.html" />
 
     <script>
         // Modal Logic
@@ -136,25 +123,6 @@
             document.getElementById('journey-modal').classList.add('hidden');
             sessionStorage.setItem('journeySeen', 'true');
         }
-
-        // UNIFIED REVERSIBLE SCROLL SCRIPT
-        (function() {
-            const observerOptions = { 
-                threshold: 0.05, 
-                rootMargin: "-20px 0px -20px 0px" 
-            };
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('opacity-100', 'translate-x-0', 'scale-100');
-                    } else {
-                        entry.target.classList.remove('opacity-100', 'translate-x-0', 'scale-100');
-                    }
-                });
-            }, observerOptions);
-            const elements = document.querySelectorAll('[class*="reveal-"]');
-            elements.forEach(el => observer.observe(el));
-        })();
     </script>
     <script type="module" src="/main.js"></script>
   </body>
