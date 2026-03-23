@@ -14,13 +14,13 @@
             <a href="/accessories" class="nav-link hover:text-[#4D8440] transition-colors duration-300 pb-1 border-b-2 border-transparent">Accessories</a>
             <a href="/about" class="nav-link hover:text-[#4D8440] transition-colors duration-300 pb-1 border-b-2 border-transparent">About</a>
             
-            <button id="cart-count" class="flex items-center space-x-2 bg-stone-900/50 px-4 py-2 rounded-full border border-stone-800 hover:border-[#4D8440] hover:text-white transition-all ml-4">
+            <button id="cart-count" class="hidden md:flex items-center space-x-2 bg-stone-900/50 px-4 py-2 rounded-full border border-stone-800 hover:border-[#4D8440] hover:text-white transition-all ml-4">
                 <span class="text-[10px] tracking-[0.3em]">Bag (0)</span>
             </button>
         </div>
 
         <div class="flex items-center space-x-6 md:hidden relative z-[110]">
-            <button id="cart-count-mobile" class="text-stone-400 hover:text-[#4D8440] transition-colors flex items-center">
+            <button id="cart-count-mobile" class="hidden text-stone-400 hover:text-[#4D8440] transition-colors flex items-center">
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
@@ -54,7 +54,6 @@
         const icon = document.getElementById('menu-icon');
         const mobileCartBtn = document.getElementById('cart-count-mobile');
 
-        // Mobile Menu Toggle
         if (btn && menu) {
             btn.onclick = () => {
                 const isOpen = menu.classList.contains('grid-rows-[1fr]');
@@ -66,16 +65,12 @@
             };
         }
 
-        // Connect Mobile Bag Icon to Cart Drawer
         if (mobileCartBtn) {
             mobileCartBtn.onclick = () => {
-                // We dispatch a custom event or check for global toggleCart
-                // Since main.js handles #cart-count, we can trigger a click on that
                 document.getElementById('cart-count')?.click();
             };
         }
 
-        // Active State Detection
         const currentPath = window.location.pathname;
         const navLinks = document.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
