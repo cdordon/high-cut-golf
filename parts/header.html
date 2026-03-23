@@ -6,6 +6,7 @@
         </a>
 
         <div id="desktop-menu" class="hidden md:flex items-center space-x-8 text-[14px] font-bold uppercase tracking-[0.2em] text-stone-400">
+            <a href="/" class="nav-link hover:text-[#4D8440] transition-colors duration-300 pb-1 border-b-2 border-transparent">Home</a>
             <a href="/about" class="nav-link hover:text-[#4D8440] transition-colors duration-300 pb-1 border-b-2 border-transparent">About</a>
             <a href="/hats" class="nav-link hover:text-[#4D8440] transition-colors duration-300 pb-1 border-b-2 border-transparent">Hats</a>
             <a href="/shirts" class="nav-link hover:text-[#4D8440] transition-colors duration-300 pb-1 border-b-2 border-transparent">Shirts</a>
@@ -22,6 +23,7 @@
     <div id="mobile-menu" class="grid grid-rows-[0fr] opacity-0 transition-all duration-[750ms] ease-in-out md:hidden bg-black border-stone-900 shadow-2xl">
         <div class="overflow-hidden">
             <div id="mobile-links" class="flex flex-col space-y-4 p-8 text-[11px] font-bold uppercase tracking-[0.3em] text-stone-400 border-t border-stone-900">
+                <a href="/" class="nav-link hover:text-[#4D8440] transition-colors">Home</a>
                 <a href="/about" class="nav-link hover:text-[#4D8440] transition-colors">About</a>
                 <a href="/hats" class="nav-link hover:text-[#4D8440] transition-colors">Hats</a>
                 <a href="/shirts" class="nav-link hover:text-[#4D8440] transition-colors">Shirts</a>
@@ -33,7 +35,7 @@
 
 <script>
     (function() {
-        // 1. Handle Mobile Menu Toggle
+        // Mobile Toggle Logic
         const btn = document.getElementById('mobile-menu-button');
         const menu = document.getElementById('mobile-menu');
         const icon = document.getElementById('menu-icon');
@@ -54,18 +56,16 @@
             });
         }
 
-        // 2. Handle Active Page Highlighting
+        // Active State Detection
         const currentPath = window.location.pathname;
         const navLinks = document.querySelectorAll('.nav-link');
 
         navLinks.forEach(link => {
-            // Check if the link's href matches the current URL path
+            // Check for exact match
             if (link.getAttribute('href') === currentPath) {
-                // Apply Active Styles
                 link.classList.remove('text-stone-400');
                 link.classList.add('text-[#4D8440]');
                 
-                // Specifically for desktop: show the green bottom border
                 if (link.classList.contains('border-transparent')) {
                     link.classList.remove('border-transparent');
                     link.classList.add('border-[#4D8440]');
