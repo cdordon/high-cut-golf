@@ -34,7 +34,7 @@
 
     <load src="parts/header.html" />
 
-    <main class="reveal-left opacity-0 -translate-x-20 transition-all duration-1000 ease-out relative flex flex-col items-center justify-center min-h-[85vh] py-32 md:py-48 overflow-hidden z-10">
+    <main class="reveal-left opacity-0 -translate-x-20 transition-all duration-1200 ease-out relative flex flex-col items-center justify-center min-h-[85vh] py-32 md:py-48 overflow-hidden z-10">
         <div class="text-center px-8 max-w-4xl">
             <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-4 uppercase">
                 Coming soon <br /> to a teebox near you...
@@ -142,38 +142,44 @@
     <load src="/parts/footer.html" />
 
     <script>
-        // Modal Logic
-        window.onload = function() {
-            if (!sessionStorage.getItem('journeySeen')) {
-                setTimeout(() => {
-                    document.getElementById('journey-modal').classList.remove('hidden');
-                }, 1000);
-            }
-        };
-        function closeJourneyModal() {
-            document.getElementById('journey-modal').classList.add('hidden');
-            sessionStorage.setItem('journeySeen', 'true');
+    // 1. JOURNEY MODAL LOGIC (Lines 145-156 in your original)
+    window.onload = function() {
+        if (!sessionStorage.getItem('journeySeen')) {
+            setTimeout(() => {
+                document.getElementById('journey-modal').classList.remove('hidden');
+            }, 1000);
         }
+    };
 
-        // UNIFIED SCROLL ANIMATION SCRIPT
-        (function() {
-            const observerOptions = { 
-                threshold: 0.1,
-                rootMargin: "0px 0px -50px 0px" 
-            };
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.remove('opacity-0', '-translate-x-20', 'translate-x-20', 'translate-y-12');
-                        entry.target.classList.add('opacity-100', 'translate-x-0', 'translate-y-0');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-            const elements = document.querySelectorAll('[class*="reveal-"]');
-            elements.forEach(el => observer.observe(el));
-        })();
-    </script>
+    function closeJourneyModal() {
+        document.getElementById('journey-modal').classList.add('hidden');
+        sessionStorage.setItem('journeySeen', 'true');
+    }
+
+    // 2. NEW REVERSIBLE SCROLL ANIMATION SCRIPT
+    (function() {
+        const observerOptions = { 
+            threshold: 0.1,
+            rootMargin: "-50px 0px -50px 0px" 
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // When scrolling into view: Slide in
+                    entry.target.classList.add('opacity-100', 'translate-x-0', 'translate-y-0');
+                } else {
+                    // When scrolling away: Slide out
+                    entry.target.classList.remove('opacity-100', 'translate-x-0', 'translate-y-0');
+                }
+            });
+        }, observerOptions);
+
+        // This watches everything starting with the class "reveal-"
+        const elements = document.querySelectorAll('[class*="reveal-"]');
+        elements.forEach(el => observer.observe(el));
+    })();
+</script>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
