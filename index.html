@@ -24,7 +24,7 @@
       gtag('config', 'G-K1QHEZG3JG');
     </script>
 </head>
-<body class="bg-[#fdfcfb] text-stone-900 font-sans">
+<body class="bg-[#fdfcfb] text-stone-900 font-sans overflow-x-hidden">
     
     <div class="fixed inset-0 flex items-center justify-center opacity-[0.135] pointer-events-none -z-10">
         <img src="/High Cut Golf Logo.svg" 
@@ -34,7 +34,7 @@
 
     <load src="parts/header.html" />
 
-    <main class="reveal-left opacity-0 -translate-x-20 transition-all duration-1200 ease-out relative flex flex-col items-center justify-center min-h-[85vh] py-32 md:py-48 overflow-hidden z-10">
+    <main class="reveal-left opacity-0 -translate-x-full scale-90 transition-all duration-[1200ms] ease-out relative flex flex-col items-center justify-center min-h-[85vh] py-32 md:py-48 z-10">
         <div class="text-center px-8 max-w-4xl">
             <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-4 uppercase">
                 Coming soon <br /> to a teebox near you...
@@ -45,11 +45,10 @@
         </div>
     </main>
 
-    <section id="instagram-feed" 
-             class="reveal-right opacity-0 translate-x-20 transition-all duration-1000 ease-out bg-black py-20 border-t border-stone-900 relative z-20">
+    <section class="bg-black py-20 border-t border-stone-900 relative z-20 overflow-hidden">
         <div class="max-w-7xl mx-auto px-6">
             
-            <div class="flex justify-between items-end mb-10">
+            <div class="reveal-right opacity-0 translate-x-full scale-95 transition-all duration-1000 ease-out flex justify-between items-end mb-10">
                 <div>
                     <span class="text-[#4D8440] font-bold uppercase tracking-[0.2em] text-xs">Instagram</span>
                     <h2 class="text-stone-200 text-3xl font-bold uppercase tracking-tighter mt-2">Latest from the Green</h2>
@@ -60,14 +59,16 @@
             </div>
 
             <div class="flex flex-wrap justify-center gap-6">
-                <a href="https://www.instagram.com/highcutgolfus/p/DWKfCsWiWr-/" target="_blank" class="group relative w-full md:w-[calc(33%-1rem)] aspect-square overflow-hidden bg-stone-900/40 border border-white/10 transition-colors hover:border-white/30">
+                <a href="https://www.instagram.com/highcutgolfus/p/DWKfCsWiWr-/" target="_blank" 
+                   class="reveal-right opacity-0 translate-x-full scale-90 transition-all duration-1000 delay-[200ms] ease-out group relative w-full md:w-[calc(33%-1rem)] aspect-square overflow-hidden bg-stone-900/40 border border-white/10">
                     <img src="/hcgembroidery.jpg" alt="High Cut Golf Embroidery" class="object-cover w-full h-full opacity-80 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
                     <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                         <span class="text-white text-xs font-bold tracking-widest uppercase">View Post</span>
                     </div>
                 </a>
 
-                <a href="https://www.instagram.com/highcutgolfus" target="_blank" class="group relative w-full md:w-[calc(33%-1rem)] aspect-square overflow-hidden bg-stone-900/40 border border-white/10 transition-colors hover:border-white/30">
+                <a href="https://www.instagram.com/highcutgolfus" target="_blank" 
+                   class="reveal-right opacity-0 translate-x-full scale-90 transition-all duration-1000 delay-[400ms] ease-out group relative w-full md:w-[calc(33%-1rem)] aspect-square overflow-hidden bg-stone-900/40 border border-white/10">
                     <img src="/hcgball.svg" alt="High Cut Golf Ball Design" class="object-cover w-full h-full opacity-80 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100" />
                     <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                         <span class="text-white text-xs font-bold tracking-widest uppercase">View Post</span>
@@ -91,20 +92,13 @@
                 <span>Subtotal</span>
                 <span id="cart-subtotal">$0.00</span>
             </div>
-            <button id="checkout-btn" class="w-full bg-stone-900 text-white py-4 uppercase font-bold tracking-widest hover:bg-green-800 transition">
-                Secure Checkout
-            </button>
+            <button id="checkout-btn" class="w-full bg-stone-900 text-white py-4 uppercase font-bold tracking-widest hover:bg-green-800 transition">Secure Checkout</button>
         </div>
     </div>
 
     <div id="cookie-banner" class="fixed bottom-4 left-4 right-4 md:left-auto md:right-8 md:w-80 bg-stone-900/95 backdrop-blur-md border border-stone-800 p-4 z-[100] shadow-2xl flex flex-col gap-3">
-        <p class="text-[9px] uppercase tracking-widest text-stone-400 leading-relaxed">
-            We use cookies to improve your High Cut experience. By staying, you're cool with it.
-        </p>
-        <button onclick="document.getElementById('cookie-banner').style.display='none'" 
-                class="w-full border border-white/20 text-white text-[10px] uppercase tracking-[0.2em] py-2 hover:bg-white hover:text-black transition-all font-bold">
-            Accept
-        </button>
+        <p class="text-[9px] uppercase tracking-widest text-stone-400 leading-relaxed">We use cookies to improve your experience. By staying, you're cool with it.</p>
+        <button onclick="document.getElementById('cookie-banner').style.display='none'" class="w-full border border-white/20 text-white text-[10px] uppercase tracking-[0.2em] py-2 hover:bg-white hover:text-black transition-all font-bold">Accept</button>
     </div>
 
     <div id="journey-modal" class="fixed inset-0 z-[150] hidden flex items-center justify-center p-6">
@@ -112,27 +106,22 @@
         <div class="relative bg-black border border-stone-800 p-8 md:p-16 max-w-4xl w-full text-center shadow-2xl overflow-y-auto max-h-[90vh]"
              style="background-image: repeating-radial-gradient(circle at center, #1c1c1a 0%, #1c1c1a 1px, transparent 1px, transparent 100%); background-size: 12px 12px;">
             <button onclick="closeJourneyModal()" class="absolute top-6 right-6 text-stone-500 hover:text-white transition-colors">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
             <img src="/High Cut Golf Logo.svg" alt="High Cut Golf Logo" class="h-36 w-auto mx-auto mb-10" />
-            <div class="mb-12">
-                <h2 class="text-3xl md:text-5xl font-bold text-white uppercase tracking-tighter mb-4">Follow the Journey</h2>
-                <p class="text-stone-400 text-[10px] md:text-xs uppercase tracking-[0.4em] italic">From our clubhouse to your teebox.</p>
-            </div>
+            <h2 class="text-3xl md:text-5xl font-bold text-white uppercase tracking-tighter mb-4">Follow the Journey</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                 <a href="https://instagram.com/highcutgolfus" target="_blank" class="group flex flex-col items-center gap-4 p-6 border border-white/5 hover:border-white/20 transition-all bg-stone-900/40">
                     <svg class="h-16 w-16 text-[#4D8440]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                    <span class="text-[12px] uppercase tracking-widest text-white font-bold">Instagram</span>
+                    <span class="text-[12px] uppercase text-white font-bold">Instagram</span>
                 </a>
                 <a href="https://tiktok.com/@highcutgolfus" target="_blank" class="group flex flex-col items-center gap-4 p-6 border border-white/5 hover:border-white/20 transition-all bg-stone-900/40">
                     <svg class="h-16 w-16 text-[#4D8440]" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.86-.6-4.12-1.31a8.15 8.15 0 0 1-1.89-1.43v6.26c.02 2.11-.49 4.3-2.06 5.83-1.75 1.76-4.51 2.36-6.79 1.5-2.28-.86-3.99-3.13-4.02-5.59-.02-2.31 1.5-4.63 3.7-5.39.75-.26 1.58-.35 2.37-.28v4.05c-.44-.05-.9-.01-1.31.12-1.11.35-1.84 1.54-1.7 2.69.15 1.17 1.34 2.01 2.5 1.83 1.15-.17 1.81-1.3 1.71-2.42V0h.71z"/></svg>
-                    <span class="text-[12px] uppercase tracking-widest text-white font-bold">TikTok</span>
+                    <span class="text-[12px] uppercase text-white font-bold">TikTok</span>
                 </a>
                 <a href="https://facebook.com/share/18P671YsEq" target="_blank" class="group flex flex-col items-center gap-4 p-6 border border-white/5 hover:border-white/20 transition-all bg-stone-900/40">
                     <svg class="h-16 w-16 text-[#4D8440]" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                    <span class="text-[12px] uppercase tracking-widest text-white font-bold">Facebook</span>
+                    <span class="text-[12px] uppercase text-white font-bold">Facebook</span>
                 </a>
             </div>
             <button onclick="closeJourneyModal()" class="text-[24px] text-white uppercase tracking-[0.3em] font-bold border-b border-white/20 pb-1 hover:border-white transition-all">Enter the Site</button>
@@ -142,44 +131,38 @@
     <load src="/parts/footer.html" />
 
     <script>
-    // 1. JOURNEY MODAL LOGIC (Lines 145-156 in your original)
-    window.onload = function() {
-        if (!sessionStorage.getItem('journeySeen')) {
-            setTimeout(() => {
-                document.getElementById('journey-modal').classList.remove('hidden');
-            }, 1000);
-        }
-    };
-
-    function closeJourneyModal() {
-        document.getElementById('journey-modal').classList.add('hidden');
-        sessionStorage.setItem('journeySeen', 'true');
-    }
-
-    // 2. NEW REVERSIBLE SCROLL ANIMATION SCRIPT
-    (function() {
-        const observerOptions = { 
-            threshold: 0.1,
-            rootMargin: "-50px 0px -50px 0px" 
+        // Modal Logic
+        window.onload = function() {
+            if (!sessionStorage.getItem('journeySeen')) {
+                setTimeout(() => {
+                    document.getElementById('journey-modal').classList.remove('hidden');
+                }, 1000);
+            }
         };
+        function closeJourneyModal() {
+            document.getElementById('journey-modal').classList.add('hidden');
+            sessionStorage.setItem('journeySeen', 'true');
+        }
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // When scrolling into view: Slide in
-                    entry.target.classList.add('opacity-100', 'translate-x-0', 'translate-y-0');
-                } else {
-                    // When scrolling away: Slide out
-                    entry.target.classList.remove('opacity-100', 'translate-x-0', 'translate-y-0');
-                }
-            });
-        }, observerOptions);
-
-        // This watches everything starting with the class "reveal-"
-        const elements = document.querySelectorAll('[class*="reveal-"]');
-        elements.forEach(el => observer.observe(el));
-    })();
-</script>
+        // UNIFIED REVERSIBLE SCROLL SCRIPT
+        (function() {
+            const observerOptions = { 
+                threshold: 0.05, 
+                rootMargin: "-20px 0px -20px 0px" 
+            };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100', 'translate-x-0', 'scale-100');
+                    } else {
+                        entry.target.classList.remove('opacity-100', 'translate-x-0', 'scale-100');
+                    }
+                });
+            }, observerOptions);
+            const elements = document.querySelectorAll('[class*="reveal-"]');
+            elements.forEach(el => observer.observe(el));
+        })();
+    </script>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
