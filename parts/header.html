@@ -20,16 +20,16 @@
     </div>
 
     <div id="mobile-menu" 
-     class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-700 ease-in-out md:hidden bg-black border-stone-900 shadow-2xl">
-    <div class="overflow-hidden">
-        <div class="flex flex-col space-y-4 p-8 text-[11px] font-bold uppercase tracking-[0.3em] text-stone-400 border-t border-stone-900">
-            <a href="/about" class="hover:text-[#4D8440] transition-colors">About</a>
-            <a href="/hats" class="hover:text-[#4D8440] transition-colors">Hats</a>
-            <a href="/shirts" class="hover:text-[#4D8440] transition-colors">Shirts</a>
-            <a href="/accessories" class="hover:text-[#4D8440] transition-colors">Accessories</a>
+         class="grid grid-rows-[0fr] opacity-0 transition-all duration-[750ms] ease-in-out md:hidden bg-black border-stone-900 shadow-2xl">
+        <div class="overflow-hidden">
+            <div class="flex flex-col space-y-4 p-8 text-[11px] font-bold uppercase tracking-[0.3em] text-stone-400 border-t border-stone-900">
+                <a href="/about" class="hover:text-[#4D8440] transition-colors">About</a>
+                <a href="/hats" class="hover:text-[#4D8440] transition-colors">Hats</a>
+                <a href="/shirts" class="hover:text-[#4D8440] transition-colors">Shirts</a>
+                <a href="/accessories" class="hover:text-[#4D8440] transition-colors">Accessories</a>
+            </div>
         </div>
     </div>
-</div>
 </nav>
 
 <script>
@@ -40,13 +40,18 @@
 
         if (btn && menu) {
             btn.addEventListener('click', () => {
+                // Check current state
                 const isOpen = menu.classList.contains('grid-rows-[1fr]');
                 
-                // Toggle Grid Height
+                // Toggle Height (Grid Row)
                 menu.classList.toggle('grid-rows-[0fr]', isOpen);
                 menu.classList.toggle('grid-rows-[1fr]', !isOpen);
                 
-                // Optional: Toggle Hamburger to X icon
+                // Toggle Fade (Opacity)
+                menu.classList.toggle('opacity-0', isOpen);
+                menu.classList.toggle('opacity-100', !isOpen);
+                
+                // Toggle Icon (Hamburger to X)
                 if (!isOpen) {
                     icon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
                 } else {
