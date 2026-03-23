@@ -19,12 +19,14 @@
         </button>
     </div>
 
-    <div id="mobile-menu" class="hidden md:hidden bg-black border-t border-stone-900 shadow-2xl">
-        <div class="flex flex-col space-y-4 p-8 text-[11px] font-bold uppercase tracking-[0.3em] text-stone-400">
-            <a href="/about" class="hover:text-[#4D8440] transition-colors">About</a>
-            <a href="/hats" class="hover:text-[#4D8440] transition-colors">Hats</a>
-            <a href="/shirts" class="hover:text-[#4D8440] transition-colors">Shirts</a>
-            <a href="/accessories" class="hover:text-[#4D8440] transition-colors">Accessories</a>
+    <div id="mobile-menu" class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-in-out md:hidden bg-black border-stone-900 shadow-2xl">
+        <div class="overflow-hidden">
+            <div class="flex flex-col space-y-4 p-8 text-[11px] font-bold uppercase tracking-[0.3em] text-stone-400 border-t border-stone-900">
+                <a href="/about" class="hover:text-[#4D8440] transition-colors">About</a>
+                <a href="/hats" class="hover:text-[#4D8440] transition-colors">Hats</a>
+                <a href="/shirts" class="hover:text-[#4D8440] transition-colors">Shirts</a>
+                <a href="/accessories" class="hover:text-[#4D8440] transition-colors">Accessories</a>
+            </div>
         </div>
     </div>
 </nav>
@@ -33,10 +35,22 @@
     (function() {
         const btn = document.getElementById('mobile-menu-button');
         const menu = document.getElementById('mobile-menu');
+        const icon = document.getElementById('menu-icon');
 
         if (btn && menu) {
             btn.addEventListener('click', () => {
-                menu.classList.toggle('hidden');
+                const isOpen = menu.classList.contains('grid-rows-[1fr]');
+                
+                // Toggle Grid Height
+                menu.classList.toggle('grid-rows-[0fr]', isOpen);
+                menu.classList.toggle('grid-rows-[1fr]', !isOpen);
+                
+                // Optional: Toggle Hamburger to X icon
+                if (!isOpen) {
+                    icon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+                } else {
+                    icon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+                }
             });
         }
     })();
