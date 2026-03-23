@@ -11,35 +11,42 @@ const grid = document.querySelector('#product-grid');
 const drawer = document.querySelector('#cart-drawer');
 const overlay = document.querySelector('#cart-overlay');
 
-// --- 1. THE REVERSIBLE ANIMATION ENGINE (Mobile Optimized) ---
+// --- 1. THE REVERSIBLE ANIMATION ENGINE (Mobile Refined) ---
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
+        // We target the Hero specifically to handle it differently than the IG feed
+        const isHero = entry.target.tagName === 'MAIN' || entry.target.classList.contains('reveal-left');
+
         if (entry.isIntersecting) {
             entry.target.classList.add('opacity-100', 'translate-x-0', 'scale-100');
         } else {
-            // Only reverse animation if the user has scrolled significantly
-            // This ensures the Hero doesn't disappear if the user just wobbles the scroll
+            // Safety: Only remove the animation if we are far from the top 
+            // This prevents the "disappearing" issue when scrolling back up
             if (window.scrollY > 100) {
                 entry.target.classList.remove('opacity-100', 'translate-x-0', 'scale-100');
             }
         }
     });
 }, { 
-    threshold: 0.01, // Triggers as soon as 1% of the element is visible
-    rootMargin: "0px" // Removed negative margins to fix mobile "choking"
+    threshold: 0.01, 
+    rootMargin: "10% 0px 10% 0px" // "Looks" ahead 10% so animations trigger sooner
 });
 
 function syncAnimations() {
     const elements = document.querySelectorAll('[class*="reveal-"]');
     elements.forEach(el => observer.observe(el));
     
-    // FORCE TRIGGER HERO: Ensures the 'Coming Soon' message shows up immediately
-    const hero = document.querySelector('main.reveal-left');
-    if (hero) {
-        setTimeout(() => {
-            hero.classList.add('opacity-100', 'translate-x-0', 'scale-100');
-        }, 100);
-    }
+    // FORCE TRIGGER TOP OF PAGE:
+    // This ensures the Hero is ALWAYS visible when the user is at the top
+    const handleTopReveal = () => {
+        if (window.scrollY < 50) {
+            const hero = document.querySelector('main.reveal-left');
+            if (hero) hero.classList.add('opacity-100', 'translate-x-0', 'scale-100');
+        }
+    };
+
+    window.addEventListener('scroll', handleTopReveal);
+    handleTopReveal(); // Run once on load
 }
 
 // --- 2. CORE LOGIC ---
@@ -48,9 +55,9 @@ async function init() {
     setupEventListeners();
 
     try {
-        const existingCheckoutId = localStorage.getItem('hcg_checkout_id');
-        if (existingCheckoutId) {
-            const checkout = await client.checkout.fetch(existingCheckoutId);
+        const existingId = localStorage.getItem('hcg_checkout_id');
+        if (existingId) {
+            const checkout = await client.checkout.fetch(existingId);
             checkoutId = checkout.id;
             updateCartUI(checkout);
         } else {
@@ -84,7 +91,6 @@ function renderProducts(products) {
     grid.innerHTML = '';
     products.forEach((p, index) => {
         const card = document.createElement('div');
-        // Mobile-friendly stagger: Slightly faster delays for smaller screens
         const delay = window.innerWidth < 768 ? index * 100 : index * 150;
         card.className = `reveal-up opacity-0 translate-y-12 scale-90 transition-all duration-1000 ease-out`;
         card.style.transitionDelay = `${delay}ms`;
