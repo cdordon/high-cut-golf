@@ -8,25 +8,25 @@
         </a>
 
         <div id="desktop-menu" class="hidden md:flex items-center space-x-8 text-[13px] font-bold uppercase tracking-[0.2em] text-stone-400">
-            <a href="/" class="nav-link hover:text-[#4D8440] transition-colors duration-300 pb-1 border-b-2 border-transparent">Home</a>
-            <a href="/hats" class="nav-link hover:text-[#4D8440] transition-colors duration-300 pb-1 border-b-2 border-transparent">Hats</a>
-            <a href="/shirts" class="nav-link hover:text-[#4D8440] transition-colors duration-300 pb-1 border-b-2 border-transparent">Shirts</a>
-            <a href="/accessories" class="nav-link hover:text-[#4D8440] transition-colors duration-300 pb-1 border-b-2 border-transparent">Accessories</a>
-            <a href="/about" class="nav-link hover:text-[#4D8440] transition-colors duration-300 pb-1 border-b-2 border-transparent">About</a>
+            <a href="/" class="nav-link hover:text-[#4C8540] transition-colors duration-300 pb-1 border-b-2 border-transparent">Home</a>
+            <a href="/hats" class="nav-link hover:text-[#4C8540] transition-colors duration-300 pb-1 border-b-2 border-transparent">Hats</a>
+            <a href="/shirts" class="nav-link hover:text-[#4C8540] transition-colors duration-300 pb-1 border-b-2 border-transparent">Shirts</a>
+            <a href="/accessories" class="nav-link hover:text-[#4C8540] transition-colors duration-300 pb-1 border-b-2 border-transparent">Accessories</a>
+            <a href="/about" class="nav-link hover:text-[#4C8540] transition-colors duration-300 pb-1 border-b-2 border-transparent">About</a>
             
-            <button id="cart-count" class="hidden md:flex items-center space-x-2 bg-stone-900/50 px-4 py-2 rounded-full border border-stone-800 hover:border-[#4D8440] hover:text-white transition-all ml-4">
+            <button id="cart-count" class="hidden md:flex items-center space-x-2 bg-stone-900/50 px-4 py-2 rounded-full border border-stone-800 hover:border-[#4C8540] hover:text-white transition-all ml-4">
                 <span class="text-[10px] tracking-[0.3em]">Bag (0)</span>
             </button>
         </div>
 
         <div class="flex items-center space-x-6 md:hidden relative z-[110]">
-            <button id="cart-count-mobile" class="hidden text-stone-400 hover:text-[#4D8440] transition-colors flex items-center">
+            <button id="cart-count-mobile" class="hidden text-stone-400 hover:text-[#4C8540] transition-colors flex items-center">
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
             </button>
 
-            <button id="mobile-menu-button" aria-label="Toggle Menu" class="text-stone-400 hover:text-[#4D8440] focus:outline-none transition-colors">
+            <button id="mobile-menu-button" aria-label="Toggle Menu" class="text-stone-400 hover:text-[#4C8540] focus:outline-none transition-colors">
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
@@ -37,11 +37,11 @@
     <div id="mobile-menu" class="grid grid-rows-[0fr] opacity-0 transition-all duration-500 ease-in-out md:hidden bg-black shadow-2xl overflow-hidden">
         <div class="min-h-0">
             <div id="mobile-links" class="flex flex-col space-y-6 p-10 text-[10px] font-black uppercase tracking-[0.4em] text-stone-400 border-t border-stone-900 bg-black">
-                <a href="/" class="nav-link hover:text-[#4D8440]">Home</a>
-                <a href="/hats" class="nav-link hover:text-[#4D8440]">Hats</a>
-                <a href="/shirts" class="nav-link hover:text-[#4D8440]">Shirts</a>
-                <a href="/accessories" class="nav-link hover:text-[#4D8440]">Accessories</a>
-                <a href="/about" class="nav-link hover:text-[#4D8440]">About</a>
+                <a href="/" class="nav-link hover:text-[#4C8540]">Home</a>
+                <a href="/hats" class="nav-link hover:text-[#4C8540]">Hats</a>
+                <a href="/shirts" class="nav-link hover:text-[#4C8540]">Shirts</a>
+                <a href="/accessories" class="nav-link hover:text-[#4C8540]">Accessories</a>
+                <a href="/about" class="nav-link hover:text-[#4C8540]">About</a>
             </div>
         </div>
     </div>
@@ -79,8 +79,8 @@
             const isActive = (linkHref === '/' && isHome) || (linkHref !== '/' && currentPath.includes(linkHref));
 
             if (isActive) {
-                link.classList.replace('text-stone-400', 'text-[#4D8440]');
-                link.classList.replace('border-transparent', 'border-[#4D8440]');
+                link.classList.replace('text-stone-400', 'text-[#4C8540]');
+                link.classList.replace('border-transparent', 'border-[#4C8540]');
             }
         });
     })();
